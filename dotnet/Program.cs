@@ -7,13 +7,14 @@ namespace MehdiMe.HttpHeaderParsingRepro
 {
     class Program
     {
-        private const int NbIterations = 50;
+        private const int NbIterations = 500;
 
 		// Set the URL to test here
-	    private const string Url = "http://api.linkedin.com/v1";
+	    private const string Url = "https://sdr.qasalesloft.com/api/users/authenticate";
 
         static void Main(string[] args)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             Console.WriteLine("Will be making {0} POST requests to {1}. Press Enter to start.", NbIterations, Url);
 
             var nbProtocolViolations = 0;
@@ -83,7 +84,7 @@ namespace MehdiMe.HttpHeaderParsingRepro
             request.ContentType = "application/json";
             request.ServicePoint.Expect100Continue = false;
 
-			var body = ReadEmbeddedResource("MehdiMe.HttpHeaderParsingRepro.Body.json");
+            var body = ReadEmbeddedResource("MehdiMe.HttpHeaderParsingRepro.Body.json");
             request.ContentLength = body.Length;
 
             using (var requestStream = request.GetRequestStream())

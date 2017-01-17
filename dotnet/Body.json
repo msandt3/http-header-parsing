@@ -1,4 +1,4 @@
 ﻿{
-  "some": "random",
-  "POST": "data"
+  "email": "garbageemail@test.com",
+  "password": "aclearlyinsecurepassword"
 }
